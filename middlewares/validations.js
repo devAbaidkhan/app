@@ -6,6 +6,7 @@
  */
 import Sessions from '../controllers/sessions.js'
 import dotenv from "dotenv";
+import * as Console from "console";
 dotenv.config();
 let engine = process?.env?.ENGINE;
 
@@ -13,19 +14,19 @@ const checkParams = async (req, res, next) => {
     let session = req?.body?.session
     let data = Sessions.getSession(session)
     if (!session) {
-        return res.status(401).json({ error: 'Sessão não informada.' });
+        return res.status(401).json({ error: 'SESSION NOT INFORMED.' });
     }
     else if (Sessions.session.length === 0) {
         return res.status(503).json({
             response: false,
             status: "Service Unavailable",
-            message: 'O Serviço esta OffLine, indisponivel.'
+            message: 'The Service is OffLine, unavailable.'
         })
     }
     else if (data.sessionkey != req.headers['sessionkey']) {
         return res.status(401).json({
             "result": 401,
-            "messages": "Não autorizado, verifique se o nome da sessão e o sessionkey estão corretos"
+            "messages": "Unauthorized, check session name and sessionkey are correct"
         })
     }
     else {
@@ -35,7 +36,7 @@ const checkParams = async (req, res, next) => {
                 return res.status(400).json({
                     response: false,
                     status: "Disconnected",
-                    message: 'A sessão do WhatsApp informada não está ativa.'
+                    message: 'The reported WhatsApp session is not active.'
                 })
             }
             else {
@@ -44,11 +45,12 @@ const checkParams = async (req, res, next) => {
         }
         else {
             const client = await data?.client?.isConnected();
+            console.log(data);
             if (!client) {
                 return res.status(400).json({
                     response: false,
                     status: "Disconnected",
-                    message: 'A sessão do WhatsApp informada não está ativa.'
+                    message: 'The reported WhatsApp session is not active.'
                 })
             }
             else {

@@ -23,7 +23,7 @@ export default class Auth {
                 res.status(401).json({
                     result: 401,
                     "status": "FAIL",
-                    "reason": "favor preencher as credencias de acesso ao Firebase"
+                    "reason": "please fill in Firebase access credentials"
                 })
     
             } else {
@@ -44,7 +44,7 @@ export default class Auth {
                                 result: 400,
                                 "status": "FAIL",
                                 "reason": "there is already a session with that name",
-                                "status": data.status
+                                "code": data.status
                             })
                         }
                     }
@@ -159,14 +159,14 @@ export default class Auth {
         if (!session) {
             return res.status(401).json({
                 "result": 401,
-                "messages": "Não autorizado, verifique se o nome da sessão esta correto"
+                "messages": "Unauthorized, check that the session name is correct"
             })
         }
         else
             if (data.sessionkey != sessionkey) {
                 return res.status(401).json({
                     "result": 401,
-                    "messages": "Não autorizado, verifique se o sessionkey esta correto"
+                    "messages": "Unauthorized, check sessionkey is correct"
                 })
             }
             else {
@@ -180,7 +180,7 @@ export default class Auth {
                 } catch (ex) {
                     return res.status(400).json({
                         response: false,
-                        message: "Error ao recuperar QRCode !"
+                        message: "Error retrieving QRCode!"
                     });
                 }
             }
@@ -201,7 +201,7 @@ export default class Auth {
         } catch (ex) {
             return res.status(400).json({
                 response: false,
-                message: "A sessão não está ativa."
+                message: "Session is not active."
             });
         }
     }

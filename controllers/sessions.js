@@ -18,7 +18,7 @@ export default class Sessions {
             }
         })
     }
-    // checar ou adiciona um usuario na sessão
+    // CHECK OR ADD A USER TO THE SESSION
     static checkAddUser(name) {
         var checkFilter = this.session.filter(order => (order.session === name)), add = null
         if (!checkFilter.length) {
@@ -31,7 +31,7 @@ export default class Sessions {
         return false
     }
 
-    // checar se exite o usuario na sessão
+    // CHECK IF THE USER EXISTS IN THE SESSION
     static checkSession(name) {
         var checkFilter = this.session.filter(order => (order.session === name))
         if (checkFilter.length) {
@@ -40,7 +40,7 @@ export default class Sessions {
         return false
     }
 
-    // pegar index da sessão (chave)
+    // get session index (key)
     static getSessionKey(name) {
         if (this.checkSession(name)) {
             for (var i in this.session) {
@@ -52,7 +52,7 @@ export default class Sessions {
         return false
     }
 
-    // adicionar informações a sessão 
+    // ADD INFORMATION TO SESSION
     static addInfoSession(name, extend) {
 
         if (this.checkSession(name)) {
@@ -66,7 +66,7 @@ export default class Sessions {
         return false
     }
 
-    // Remove object na sessão
+    // Remove object na session
     static removeInfoObjects(name, key) {
         if (this.checkSession(name)) {
             for (var i in this.session) {
@@ -79,7 +79,7 @@ export default class Sessions {
         return false
     }
 
-    // deletar sessão
+    // DELETE SESSION
     static deleteSession(name) {
         if (this.checkSession(name)) {
             var key = this.getSessionKey(name)
@@ -89,7 +89,7 @@ export default class Sessions {
         return false
     }
 
-    // retornar sessão
+    // RETURN SESSION
     static getSession(name) {
         if (this.checkSession(name)) {
             var key = this.getSessionKey(name)
@@ -98,12 +98,12 @@ export default class Sessions {
         return false
     }
 
-    // retornar todas
+    // RETURN ALL
     static getAll() {
         return this.session
     }
 
-    // checa o client
+    // CHECK THE CLIENT
     static checkClient(name) {
         if (this.getSession(name) && this.getSession(name).client) {
             return true

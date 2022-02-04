@@ -22,7 +22,7 @@ export default class Mensagens {
         if (!req.body.text) {
             return res.status(400).json({
                 status: 400,
-                error: "Text não foi informado"
+                error: "Text was not informed"
             })
         }
         else {
